@@ -1,0 +1,21 @@
+To compile and flash the firmware (takes a couple minutes):
+	qmk flash -c -kb bastardkb/dilemma/3x5_3 -km <keymap>
+		I edited the existing "via" keymap because I'm lazy, so substitute via for <keymap>
+
+To convert images to display on the LCD:
+	qmk painter-convert-graphics -f <color format> -i <image_file> -o <output_directory>
+		I used pal16 color format because it worked and I had a simple image
+		I resized the PNG images I used to 240x240 pixels to make it match the screen
+		I also cropped them to circles because I used a circular LCD
+
+Make sure to update the following files when using a new image:
+	rules.mk (change SRC)
+	keymap.c (change #include and qp_load_image_mem)
+
+References: 
+	https://docs.qmk.fm/#/quantum_painter
+		Lot of good info there, but incomplete when starting from zero knowledge
+	BastardKB Discord server
+		Use the Search bar and look for keywords like "LCD" or "pinout" or "quantum painter"
+	QMK Discord Server
+		They have help channels with very smart people
