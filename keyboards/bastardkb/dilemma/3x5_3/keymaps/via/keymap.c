@@ -17,6 +17,12 @@
  */
 
 #include QMK_KEYBOARD_H
+#include <qp.h>
+//#include "generated/bongo_cat.qgf.h"
+//#include "generated/smiley.qgf.h"
+#include "generated/BlueDisappointment.qgf.h"
+//#include "generated/explosion.qgf.h"
+//#include "generated/amazon.qgf.h"
 
 enum dilemma_keymap_layers {
     LAYER_BASE = 0,
@@ -207,3 +213,18 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 };
 // clang-format on
 #endif // ENCODER_MAP_ENABLE
+
+painter_device_t display;
+static painter_image_handle_t my_image;
+void keyboard_post_init_kb(void) {
+    display = qp_gc9a01_make_spi_device(240, 240, LCD_CS_PIN, LCD_DC_PIN, LCD_RST_PIN, 2, 0);
+    qp_init(display, QP_ROTATION_0);
+    my_image = qp_load_image_mem(gfx_BlueDisappointment);
+    //my_image = qp_load_image_mem(gfx_explosion);
+    //my_image = qp_load_image_mem(gfx_amazon);
+    if (my_image != NULL) {
+        qp_clear(display);
+        qp_drawimage(display, (0), (0), my_image);
+        qp_flush(display);
+    }
+}

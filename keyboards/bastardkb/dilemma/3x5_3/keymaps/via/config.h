@@ -21,3 +21,7 @@
 /* VIA configuration. */
 #    define DYNAMIC_KEYMAP_LAYER_COUNT 8
 #endif // VIA_ENABLE
+
+#define LCD_DC_PIN GP11
+#define LCD_CS_PIN GP12
+#define LCD_RST_PIN GP13
